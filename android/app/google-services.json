@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "756531236822",
+    "project_id": "orderstack-f94c3",
+    "storage_bucket": "orderstack-f94c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756531236822:android:f62f76c8749cc3cad11e77",
+        "android_client_info": {
+          "package_name": "com.example.order_stack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756531236822-n00g9mjjcn2ptempciht33lv5t86k4ca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzOEeDgREvvpZ03sjkNVvZcnj8L2CuXQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756531236822-n00g9mjjcn2ptempciht33lv5t86k4ca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
