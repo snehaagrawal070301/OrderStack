@@ -1,10 +1,6 @@
-import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:order_stack/Screen3.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 
 class MasterLogin extends StatefulWidget {
@@ -116,4 +112,4 @@ class MasterLoginPage extends State<MasterLogin> {
           ),
         ));
   }
-}
+}*/
