@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:order_stack/Widgets.dart';
 import 'package:order_stack/extras/AddCustomerExtra.dart';
 
-class AddCustomerScreen extends StatefulWidget {
-  const AddCustomerScreen({Key? key}) : super(key: key);
+class AddItemScreen extends StatefulWidget {
+  const AddItemScreen({Key? key}) : super(key: key);
 
   @override
-  _AddCustomerScreenState createState() => _AddCustomerScreenState();
+  _AddItemScreenState createState() => _AddItemScreenState();
 }
 
-class _AddCustomerScreenState extends State<AddCustomerScreen> {
+class _AddItemScreenState extends State<AddItemScreen> {
   final formKey = GlobalKey<FormState>();
   TextEditingController phonenumber = TextEditingController();
   TextEditingController memberId = TextEditingController();
@@ -136,7 +136,7 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  myText("Add Customer",
+                  myText("Add Item",
                       size: Mq.height(context) * 0.03,
                       color: Theme.of(context).textTheme.headline1?.color),
                   SizedBox(
