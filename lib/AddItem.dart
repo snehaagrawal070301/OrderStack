@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:order_stack/Widgets.dart';
+import 'package:order_stack/components/colorValues.dart';
 import 'package:order_stack/extras/AddCustomerExtra.dart';
 
 class AddItemScreen extends StatefulWidget {
@@ -11,8 +12,11 @@ class AddItemScreen extends StatefulWidget {
 
 class _AddItemScreenState extends State<AddItemScreen> {
   final formKey = GlobalKey<FormState>();
-  TextEditingController phonenumber = TextEditingController();
-  TextEditingController memberId = TextEditingController();
+  TextEditingController ItemName = TextEditingController();
+  TextEditingController ItemPrice = TextEditingController();
+  TextEditingController ItemType = TextEditingController();
+  TextEditingController ItemUnit = TextEditingController();
+  TextEditingController ItemQuantity = TextEditingController();
   /*String code="";
   String mobile = "";
   String memberID="";
@@ -125,7 +129,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
   @override
   Widget build(BuildContext context) {
       return Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Color(ColorValues.THEME_COLOR),
         body: SafeArea(
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(
@@ -136,23 +140,103 @@ class _AddItemScreenState extends State<AddItemScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  myText("Add Item",
+                  Row(children:[
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: Mq.height(context)*0.06,
+                        width: Mq.height(context)*0.06,
+                        decoration: BoxDecoration(
+                          color: Color(ColorValues.WHITE_COLOR),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Icon(Icons.arrow_back,color: Color(ColorValues.THEME_COLOR),)),
+                    ),
+                    Padding(padding: EdgeInsets.only(left: 10),child:myText("Add Item",
                       size: Mq.height(context) * 0.03,
-                      color: Theme.of(context).textTheme.headline1?.color),
+                      color:  Color(ColorValues.WHITE_COLOR),)),]),
                   SizedBox(
-                    height: Mq.height(context) * 0.025,
+                    height: Mq.height(context) * 0.04,
                   ),
-                  GestureDetector(
-                    onTap: () {
-                  },
-                    child: const HomeScreenOptions(
-                        optionTitle: "View All Contacts",
-                        leadingColor: Color(0xffF9C910)),
-                  ),
-                  SizedBox(height: Mq.height(context)*0.02,),
-                  myText("Enter Mobile Number",
+                  myText("Enter Product Name",
                       size: Mq.height(context) * 0.020,
-                      color: Theme.of(context).textTheme.headline1!.color,
+                      color: Color(ColorValues.WHITE_COLOR),
+                      fontWeight: FontWeight.w500),
+                  Container(
+                    height: MediaQuery.of(context).size.height / 14,
+                    margin: EdgeInsets.only(
+                        top: Mq.height(context) * 0.015,
+                        bottom: Mq.height(context) * 0.02),
+                    padding: EdgeInsets.only(
+                        left: Mq.width(context) * 0.02,
+                        top: Mq.height(context) * 0.01,
+                        bottom: Mq.height(context) * 0.01,
+                        right: Mq.width(context) * 0.01),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Theme.of(context).dividerColor, width: 0.4),
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(6.0),
+                    ),
+                    child: Center(
+                      child: TextFormField(
+                        keyboardType: TextInputType.name,
+                        autofocus: false,
+                        controller: ItemName,
+                        style: inputStyle(context),
+                        decoration: InputDecoration(
+                          hintText: "Product name",
+                          hintStyle: TextStyle(
+                              fontSize: 14,
+                              color:
+                                  Theme.of(context).textTheme.headline5!.color),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                  myText("Enter Product Type",
+                      size: Mq.height(context) * 0.020,
+                      color: Color(ColorValues.WHITE_COLOR),
+                      fontWeight: FontWeight.w500),
+                  Container(
+                    height: MediaQuery.of(context).size.height / 14,
+                    margin: EdgeInsets.only(
+                        top: Mq.height(context) * 0.015,
+                        bottom: Mq.height(context) * 0.02),
+                    padding: EdgeInsets.only(
+                        left: Mq.width(context) * 0.02,
+                        top: Mq.height(context) * 0.01,
+                        bottom: Mq.height(context) * 0.01,
+                        right: Mq.width(context) * 0.01),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Theme.of(context).dividerColor, width: 0.4),
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(6.0),
+                    ),
+                    child: Center(
+                      child: TextFormField(
+                        keyboardType: TextInputType.name,
+                        autofocus: false,
+                        controller: ItemType,
+                        style: inputStyle(context),
+                        decoration: InputDecoration(
+                          hintText: "Product type",
+                          hintStyle: TextStyle(
+                              fontSize: 14,
+                              color:
+                                  Theme.of(context).textTheme.headline5!.color),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                  myText("Enter Product Price",
+                      size: Mq.height(context) * 0.020,
+                      color: Color(ColorValues.WHITE_COLOR),
                       fontWeight: FontWeight.w500),
                   Container(
                     height: MediaQuery.of(context).size.height / 14,
@@ -174,10 +258,10 @@ class _AddItemScreenState extends State<AddItemScreen> {
                       child: TextFormField(
                         keyboardType: TextInputType.number,
                         autofocus: false,
-                        controller: phonenumber,
+                        controller: ItemPrice,
                         style: inputStyle(context),
                         decoration: InputDecoration(
-                          hintText: "234234536",
+                          hintText: "Product price",
                           hintStyle: TextStyle(
                               fontSize: 14,
                               color:
@@ -187,83 +271,9 @@ class _AddItemScreenState extends State<AddItemScreen> {
                       ),
                     ),
                   ),
-                  myText("Enter Customer Name",
+                  myText("Enter Product Unit",
                       size: Mq.height(context) * 0.020,
-                      color: Theme.of(context).textTheme.headline1!.color,
-                      fontWeight: FontWeight.w500),
-                  Container(
-                    height: MediaQuery.of(context).size.height / 14,
-                    margin: EdgeInsets.only(
-                        top: Mq.height(context) * 0.015,
-                        bottom: Mq.height(context) * 0.02),
-                    padding: EdgeInsets.only(
-                        left: Mq.width(context) * 0.02,
-                        top: Mq.height(context) * 0.01,
-                        bottom: Mq.height(context) * 0.01,
-                        right: Mq.width(context) * 0.01),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Theme.of(context).dividerColor, width: 0.4),
-                      color: Theme.of(context).cardColor,
-                      borderRadius: BorderRadius.circular(6.0),
-                    ),
-                    child: Center(
-                      child: TextFormField(
-                        keyboardType: TextInputType.name,
-                        autofocus: false,
-                        controller: phonenumber,
-                        style: inputStyle(context),
-                        decoration: InputDecoration(
-                          hintText: "name",
-                          hintStyle: TextStyle(
-                              fontSize: 14,
-                              color:
-                                  Theme.of(context).textTheme.headline5!.color),
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                  ),
-                  myText("Enter Customer Email",
-                      size: Mq.height(context) * 0.020,
-                      color: Theme.of(context).textTheme.headline1!.color,
-                      fontWeight: FontWeight.w500),
-                  Container(
-                    height: MediaQuery.of(context).size.height / 14,
-                    margin: EdgeInsets.only(
-                        top: Mq.height(context) * 0.015,
-                        bottom: Mq.height(context) * 0.02),
-                    padding: EdgeInsets.only(
-                        left: Mq.width(context) * 0.02,
-                        top: Mq.height(context) * 0.01,
-                        bottom: Mq.height(context) * 0.01,
-                        right: Mq.width(context) * 0.01),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Theme.of(context).dividerColor, width: 0.4),
-                      color: Theme.of(context).cardColor,
-                      borderRadius: BorderRadius.circular(6.0),
-                    ),
-                    child: Center(
-                      child: TextFormField(
-                        keyboardType: TextInputType.emailAddress,
-                        autofocus: false,
-                        controller: phonenumber,
-                        style: inputStyle(context),
-                        decoration: InputDecoration(
-                          hintText: "email",
-                          hintStyle: TextStyle(
-                              fontSize: 14,
-                              color:
-                                  Theme.of(context).textTheme.headline5!.color),
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                  ),
-                  myText("Shop Name",
-                      size: Mq.height(context) * 0.020,
-                      color: Theme.of(context).textTheme.headline1!.color,
+                      color: Color(ColorValues.WHITE_COLOR),
                       fontWeight: FontWeight.w500),
                   Container(
                     margin: EdgeInsets.only(
@@ -284,10 +294,10 @@ class _AddItemScreenState extends State<AddItemScreen> {
                       child: TextFormField(
                         keyboardType: TextInputType.name,
                         autofocus: false,
-                        controller: memberId,
+                        controller: ItemUnit,
                         style: inputStyle(context),
                         decoration: InputDecoration(
-                          hintText: "shop name",
+                          hintText: "Product unit",
                           hintStyle: TextStyle(
                               fontSize: 14,
                               color:
@@ -297,9 +307,9 @@ class _AddItemScreenState extends State<AddItemScreen> {
                       ),
                     ),
                   ),
-                  myText("Shop Address",
+                  myText("Enter Product Quantity",
                       size: Mq.height(context) * 0.020,
-                      color: Theme.of(context).textTheme.headline1!.color,
+                      color: Color(ColorValues.WHITE_COLOR),
                       fontWeight: FontWeight.w500),
                   Container(
                     margin: EdgeInsets.only(
@@ -318,12 +328,12 @@ class _AddItemScreenState extends State<AddItemScreen> {
                     ),
                     child: Center(
                       child: TextFormField(
-                        keyboardType: TextInputType.name,
+                        keyboardType: TextInputType.number,
                         autofocus: false,
-                        controller: memberId,
+                        controller: ItemQuantity,
                         style: inputStyle(context),
                         decoration: InputDecoration(
-                          hintText: "shop address",
+                          hintText: "Product quantity",
                           hintStyle: TextStyle(
                               fontSize: 14,
                               color:
@@ -343,12 +353,12 @@ class _AddItemScreenState extends State<AddItemScreen> {
                       child: Container(
                           height: 56,
                           decoration: BoxDecoration(
-                              color: Colors.blue,
+                              color: Color(ColorValues.WHITE_COLOR),
                               borderRadius: BorderRadius.circular(6)),
                           child: Center(
-                            child: myText("Add Member",
+                            child: myText("Add Item",
                                 size: Mq.height(context) * 0.024,
-                                color: Colors.white,
+                                color: Color(ColorValues.THEME_COLOR),
                                 fontWeight: FontWeight.w400),
                           )))
                 ],

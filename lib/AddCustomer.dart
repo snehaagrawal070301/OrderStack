@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:order_stack/Widgets.dart';
+import 'package:order_stack/components/colorValues.dart';
 import 'package:order_stack/extras/AddCustomerExtra.dart';
 
 class AddCustomerScreen extends StatefulWidget {
@@ -11,8 +12,11 @@ class AddCustomerScreen extends StatefulWidget {
 
 class _AddCustomerScreenState extends State<AddCustomerScreen> {
   final formKey = GlobalKey<FormState>();
-  TextEditingController phonenumber = TextEditingController();
-  TextEditingController memberId = TextEditingController();
+  TextEditingController cusNumber = TextEditingController();
+  TextEditingController cusName = TextEditingController();
+  TextEditingController cusEmail = TextEditingController();
+  TextEditingController shopName = TextEditingController();
+  TextEditingController shopAddress = TextEditingController();
   /*String code="";
   String mobile = "";
   String memberID="";
@@ -125,7 +129,7 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
   @override
   Widget build(BuildContext context) {
       return Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Color(ColorValues.THEME_COLOR).withOpacity(0.9),
         body: SafeArea(
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(
@@ -136,9 +140,23 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  myText("Add Customer",
+                  Row(children:[
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: Mq.height(context)*0.06,
+                        width: Mq.height(context)*0.06,
+                        decoration: BoxDecoration(
+                          color: Color(ColorValues.WHITE_COLOR),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Icon(Icons.arrow_back,color: Color(ColorValues.THEME_COLOR),)),
+                    ),
+                    Padding(padding: EdgeInsets.only(left: 10),child:myText("Add Customer",
                       size: Mq.height(context) * 0.03,
-                      color: Theme.of(context).textTheme.headline1?.color),
+                      color:  Color(ColorValues.WHITE_COLOR),)),]),
                   SizedBox(
                     height: Mq.height(context) * 0.025,
                   ),
@@ -152,7 +170,7 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
                   SizedBox(height: Mq.height(context)*0.02,),
                   myText("Enter Mobile Number",
                       size: Mq.height(context) * 0.020,
-                      color: Theme.of(context).textTheme.headline1!.color,
+                      color: Color(ColorValues.WHITE_COLOR),
                       fontWeight: FontWeight.w500),
                   Container(
                     height: MediaQuery.of(context).size.height / 14,
@@ -174,7 +192,7 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
                       child: TextFormField(
                         keyboardType: TextInputType.number,
                         autofocus: false,
-                        controller: phonenumber,
+                        controller: cusNumber,
                         style: inputStyle(context),
                         decoration: InputDecoration(
                           hintText: "234234536",
@@ -189,7 +207,7 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
                   ),
                   myText("Enter Customer Name",
                       size: Mq.height(context) * 0.020,
-                      color: Theme.of(context).textTheme.headline1!.color,
+                      color: Color(ColorValues.WHITE_COLOR),
                       fontWeight: FontWeight.w500),
                   Container(
                     height: MediaQuery.of(context).size.height / 14,
@@ -211,7 +229,7 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
                       child: TextFormField(
                         keyboardType: TextInputType.name,
                         autofocus: false,
-                        controller: phonenumber,
+                        controller: cusName,
                         style: inputStyle(context),
                         decoration: InputDecoration(
                           hintText: "name",
@@ -226,7 +244,7 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
                   ),
                   myText("Enter Customer Email",
                       size: Mq.height(context) * 0.020,
-                      color: Theme.of(context).textTheme.headline1!.color,
+                      color: Color(ColorValues.WHITE_COLOR),
                       fontWeight: FontWeight.w500),
                   Container(
                     height: MediaQuery.of(context).size.height / 14,
@@ -248,7 +266,7 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
                       child: TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         autofocus: false,
-                        controller: phonenumber,
+                        controller: cusEmail,
                         style: inputStyle(context),
                         decoration: InputDecoration(
                           hintText: "email",
@@ -263,7 +281,7 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
                   ),
                   myText("Shop Name",
                       size: Mq.height(context) * 0.020,
-                      color: Theme.of(context).textTheme.headline1!.color,
+                      color: Color(ColorValues.WHITE_COLOR),
                       fontWeight: FontWeight.w500),
                   Container(
                     margin: EdgeInsets.only(
@@ -284,7 +302,7 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
                       child: TextFormField(
                         keyboardType: TextInputType.name,
                         autofocus: false,
-                        controller: memberId,
+                        controller: shopName,
                         style: inputStyle(context),
                         decoration: InputDecoration(
                           hintText: "shop name",
@@ -299,7 +317,7 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
                   ),
                   myText("Shop Address",
                       size: Mq.height(context) * 0.020,
-                      color: Theme.of(context).textTheme.headline1!.color,
+                      color: Color(ColorValues.WHITE_COLOR),
                       fontWeight: FontWeight.w500),
                   Container(
                     margin: EdgeInsets.only(
@@ -320,7 +338,7 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
                       child: TextFormField(
                         keyboardType: TextInputType.name,
                         autofocus: false,
-                        controller: memberId,
+                        controller: shopAddress,
                         style: inputStyle(context),
                         decoration: InputDecoration(
                           hintText: "shop address",
@@ -343,12 +361,12 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
                       child: Container(
                           height: 56,
                           decoration: BoxDecoration(
-                              color: Colors.blue,
+                              color: Color(ColorValues.WHITE_COLOR),
                               borderRadius: BorderRadius.circular(6)),
                           child: Center(
                             child: myText("Add Member",
                                 size: Mq.height(context) * 0.024,
-                                color: Colors.white,
+                                color: Color(ColorValues.THEME_COLOR),
                                 fontWeight: FontWeight.w400),
                           )))
                 ],

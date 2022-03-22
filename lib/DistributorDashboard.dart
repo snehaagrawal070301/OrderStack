@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:order_stack/AddCustomer.dart';
+import 'package:order_stack/AddItem.dart';
 import 'package:order_stack/components/colorValues.dart';
 
 class DistributorDashboard extends StatefulWidget {
@@ -35,7 +36,7 @@ class _DistributorDashboardState extends State<DistributorDashboard> {
                 Expanded(
                   flex: 10,
                   child: Text(
-                    "Welcome to HomeLabz!",
+                    "Welcome to OrderStack!",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color(ColorValues.WHITE_COLOR),
@@ -166,7 +167,7 @@ class _DistributorDashboardState extends State<DistributorDashboard> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    AddCustomerScreen()));
+                                                    AddItemScreen()));
                                       },
                                       child: Container(
                                         height:
