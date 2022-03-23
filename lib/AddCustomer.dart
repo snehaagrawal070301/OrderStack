@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:order_stack/Widgets.dart';
 import 'package:order_stack/components/colorValues.dart';
 import 'package:order_stack/extras/AddCustomerExtra.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:order_stack/services/DatabaseMethods.dart';
 
 class AddCustomerScreen extends StatefulWidget {
   const AddCustomerScreen({Key? key}) : super(key: key);
@@ -17,16 +19,12 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
   TextEditingController cusEmail = TextEditingController();
   TextEditingController shopName = TextEditingController();
   TextEditingController shopAddress = TextEditingController();
-  /*String code="";
-  String mobile = "";
-  String memberID="";
+   String number="";
+   DatabaseMethods databaseMethods = DatabaseMethods();
   QuerySnapshot? querySnapshot;
-  TextEditingController phonenumber = TextEditingController();
-  TextEditingController memberId = TextEditingController();
-  DatabaseMethods databaseMethods = DatabaseMethods();
   addMemberDetails() async {
     if (formKey.currentState!.validate()) {
-      await databaseMethods.getMemberMobile(code,mobile).then((val) {
+      await databaseMethods.getMemberMobile(cusNumber.text).then((val) {
         setState(() {         
           querySnapshot = val;
           print(querySnapshot?.docs.length);
@@ -34,98 +32,21 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
       });
       if (querySnapshot?.docs.length == 0) {
         CollectionReference users =
-        FirebaseFirestore.instance.collection('members');
+        FirebaseFirestore.instance.collection('customer');
     await users.doc().set({
-      'profile_photo_url': "",
-      'admin_add_date':Timestamp.now(),
-      'profile_add_date':Timestamp.now(),
-      'full_name': "",
-      'organization_name': "",
-      'club_id': "",
-      'member_id': memberID,
-      'role': 'member',
-      'mobile_number':{
-        'code':code,
-        'number':mobile,
-      },
-      'email': "",
-      'gender': '',
-      'bio': "",
-       'professional_details': 
-         {
-           'occupation': '',
-           'address': 
-             {
-               'line': '',
-               'city': '',
-               'state': '',
-               'pincode': '',
-               'country': '',
-               'landmark': ''
-             },
-           'qualification': '',
-           'website_link': '',
-         },
-       'personal_details': 
-         {
-           'date_of_birth_member': {
-             'day_member':'',
-             'month_member':'',
-             'year_member':'',
-           },
-           'marital_status': '',
-           'date_of_marriage': {
-             'marriage_day':'',
-             'marriage_month':'',
-             'marriage_year':'',
-           },
-           'current_address': 
-             {
-               'line': '',
-               'city': '',
-               'state': '',
-               'pincode': '',
-               'country': '',
-               'landmark': ''
-             },
-            'permanent_address': 
-             {
-               'line': '',
-               'city': '',
-               'state': '',
-               'pincode': '',
-               'country': '',
-               'landmark': ''
-             },
-           'spouse': 
-             {
-               'full_name': '',
-               'date_of_birth_spouse': {
-                  'day_spouse':'',
-                  'month_spouse':'',
-                  'year_spouse':'',
-                },
-               'gender': '',
-             },
-           'children': 
-             {
-               'full_name': '',
-               'date_of_birth_children': {
-                  'day_children':'',
-                  'month_children':'',
-                  'year_children':'',
-                },
-               'gender': '',
-             },
-         }
+      "name":cusName.text,
+      "number":cusNumber.text,
+      "email":cusEmail.text,
+      "shopName":shopName.text,
+      "shopAddress":shopAddress.text,
     });
-    getToast(context, "Member successfully added");
+    getToast(context, "Customer successfully added");
       } else {
         print("already added");
-        getToast(context,"Already Registered");
+        getToast(context,"Already Added");
       }
     }
-  }*/
+  }
   @override
   Widget build(BuildContext context) {
       return Scaffold(
@@ -357,6 +278,7 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
                   ),
                   GestureDetector(
                       onTap: () {
+                        addMemberDetails();
                       },
                       child: Container(
                           height: 56,
@@ -364,7 +286,7 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
                               color: Color(ColorValues.WHITE_COLOR),
                               borderRadius: BorderRadius.circular(6)),
                           child: Center(
-                            child: myText("Add Member",
+                            child: myText("Add Customer",
                                 size: Mq.height(context) * 0.024,
                                 color: Color(ColorValues.THEME_COLOR),
                                 fontWeight: FontWeight.w400),
