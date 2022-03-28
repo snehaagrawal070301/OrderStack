@@ -1,7 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:order_stack/Widgets.dart';
 import 'package:order_stack/components/colorValues.dart';
-import 'package:order_stack/extras/AddCustomerExtra.dart';
+import 'package:order_stack/services/DatabaseMethods.dart';
 
 class AddItemScreen extends StatefulWidget {
   const AddItemScreen({Key? key}) : super(key: key);
@@ -12,112 +13,39 @@ class AddItemScreen extends StatefulWidget {
 
 class _AddItemScreenState extends State<AddItemScreen> {
   final formKey = GlobalKey<FormState>();
-  TextEditingController ItemName = TextEditingController();
-  TextEditingController ItemPrice = TextEditingController();
-  TextEditingController ItemType = TextEditingController();
-  TextEditingController ItemUnit = TextEditingController();
-  TextEditingController ItemQuantity = TextEditingController();
-  /*String code="";
+  TextEditingController itemName = TextEditingController();
+  TextEditingController itemPrice = TextEditingController();
+  TextEditingController itemType = TextEditingController();
+  TextEditingController itemUnit = TextEditingController();
+  TextEditingController itemQuantity = TextEditingController();
+  String code="";
   String mobile = "";
   String memberID="";
   QuerySnapshot? querySnapshot;
-  TextEditingController phonenumber = TextEditingController();
   TextEditingController memberId = TextEditingController();
   DatabaseMethods databaseMethods = DatabaseMethods();
-  addMemberDetails() async {
+  int id=1;
+
+  /*addMemberDetails() async {
+    var size;
     if (formKey.currentState!.validate()) {
-      await databaseMethods.getMemberMobile(code,mobile).then((val) {
+      await databaseMethods.getMemberMobile(itemName.text).then((val) {
         setState(() {         
           querySnapshot = val;
+          size= querySnapshot?.docs.length;
           print(querySnapshot?.docs.length);
         });
       });
       if (querySnapshot?.docs.length == 0) {
         CollectionReference users =
-        FirebaseFirestore.instance.collection('members');
+        FirebaseFirestore.instance.collection('item');
     await users.doc().set({
-      'profile_photo_url': "",
-      'admin_add_date':Timestamp.now(),
-      'profile_add_date':Timestamp.now(),
-      'full_name': "",
-      'organization_name': "",
-      'club_id': "",
-      'member_id': memberID,
-      'role': 'member',
-      'mobile_number':{
-        'code':code,
-        'number':mobile,
-      },
-      'email': "",
-      'gender': '',
-      'bio': "",
-       'professional_details': 
-         {
-           'occupation': '',
-           'address': 
-             {
-               'line': '',
-               'city': '',
-               'state': '',
-               'pincode': '',
-               'country': '',
-               'landmark': ''
-             },
-           'qualification': '',
-           'website_link': '',
-         },
-       'personal_details': 
-         {
-           'date_of_birth_member': {
-             'day_member':'',
-             'month_member':'',
-             'year_member':'',
-           },
-           'marital_status': '',
-           'date_of_marriage': {
-             'marriage_day':'',
-             'marriage_month':'',
-             'marriage_year':'',
-           },
-           'current_address': 
-             {
-               'line': '',
-               'city': '',
-               'state': '',
-               'pincode': '',
-               'country': '',
-               'landmark': ''
-             },
-            'permanent_address': 
-             {
-               'line': '',
-               'city': '',
-               'state': '',
-               'pincode': '',
-               'country': '',
-               'landmark': ''
-             },
-           'spouse': 
-             {
-               'full_name': '',
-               'date_of_birth_spouse': {
-                  'day_spouse':'',
-                  'month_spouse':'',
-                  'year_spouse':'',
-                },
-               'gender': '',
-             },
-           'children': 
-             {
-               'full_name': '',
-               'date_of_birth_children': {
-                  'day_children':'',
-                  'month_children':'',
-                  'year_children':'',
-                },
-               'gender': '',
-             },
-         }
+      "ItemId":querySnapshot?.docs[size].data["ItemId"]++,
+    "ItemName":itemName.text,
+      "ItemType":itemType.text,
+      "ItemPrice" : itemPrice.text,
+      "ItemUnit" : itemUnit.text,
+      "ItemQuantity" : itemQuantity
     });
     getToast(context, "Member successfully added");
       } else {
@@ -184,7 +112,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                       child: TextFormField(
                         keyboardType: TextInputType.name,
                         autofocus: false,
-                        controller: ItemName,
+                        controller: itemName,
                         style: inputStyle(context),
                         decoration: InputDecoration(
                           hintText: "Product name",
@@ -221,7 +149,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                       child: TextFormField(
                         keyboardType: TextInputType.name,
                         autofocus: false,
-                        controller: ItemType,
+                        controller: itemType,
                         style: inputStyle(context),
                         decoration: InputDecoration(
                           hintText: "Product type",
@@ -258,7 +186,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                       child: TextFormField(
                         keyboardType: TextInputType.number,
                         autofocus: false,
-                        controller: ItemPrice,
+                        controller: itemPrice,
                         style: inputStyle(context),
                         decoration: InputDecoration(
                           hintText: "Product price",
@@ -294,7 +222,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                       child: TextFormField(
                         keyboardType: TextInputType.name,
                         autofocus: false,
-                        controller: ItemUnit,
+                        controller: itemUnit,
                         style: inputStyle(context),
                         decoration: InputDecoration(
                           hintText: "Product unit",
@@ -330,7 +258,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                       child: TextFormField(
                         keyboardType: TextInputType.number,
                         autofocus: false,
-                        controller: ItemQuantity,
+                        controller: itemQuantity,
                         style: inputStyle(context),
                         decoration: InputDecoration(
                           hintText: "Product quantity",
