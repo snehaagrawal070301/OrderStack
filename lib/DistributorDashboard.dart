@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:order_stack/AddCustomer.dart';
 import 'package:order_stack/AddItem.dart';
+import 'package:order_stack/GenerateOrder.dart';
 import 'package:order_stack/components/colorValues.dart';
 
 class DistributorDashboard extends StatefulWidget {
@@ -231,7 +232,11 @@ class _DistributorDashboardState extends State<DistributorDashboard> {
                                   child: Column(
                                     children: [
                                       GestureDetector(
-                                        onTap: () {},
+                                        onTap: () {Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    GenerateOrder()));},
                                         child: Container(
                                           height: MediaQuery.of(context)
                                                   .size
@@ -267,7 +272,7 @@ class _DistributorDashboardState extends State<DistributorDashboard> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    "Vault",
+                                                    "Generate Order",
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                       fontFamily: "Regular",

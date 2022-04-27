@@ -26,34 +26,26 @@ class _AddItemScreenState extends State<AddItemScreen> {
   DatabaseMethods databaseMethods = DatabaseMethods();
   int id=1;
 
-  /*addMemberDetails() async {
-    var size;
+  addItemDetails() async {
     if (formKey.currentState!.validate()) {
-      await databaseMethods.getMemberMobile(itemName.text).then((val) {
-        setState(() {         
-          querySnapshot = val;
-          size= querySnapshot?.docs.length;
-          print(querySnapshot?.docs.length);
-        });
-      });
-      if (querySnapshot?.docs.length == 0) {
+
+
         CollectionReference users =
         FirebaseFirestore.instance.collection('item');
-    await users.doc().set({
-      "ItemId":querySnapshot?.docs[size].data["ItemId"]++,
-    "ItemName":itemName.text,
-      "ItemType":itemType.text,
-      "ItemPrice" : itemPrice.text,
-      "ItemUnit" : itemUnit.text,
-      "ItemQuantity" : itemQuantity
-    });
-    getToast(context, "Member successfully added");
-      } else {
-        print("already added");
-        getToast(context,"Already Registered");
-      }
+        await users.doc().set({
+          "itemName":itemName.text,
+          "itemPrice":itemPrice.text,
+          "itemType":itemType.text,
+          "itemUnit":itemUnit.text,
+          "itemQuantity":itemQuantity.text,
+        });
+        getToast(context, "Item successfully added");
+      // else {
+        //print("already added");
+        //getToast(context,"Already Added");
+      //}
     }
-  }*/
+  }
   @override
   Widget build(BuildContext context) {
       return Scaffold(
@@ -277,6 +269,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                   ),
                   GestureDetector(
                       onTap: () {
+                        addItemDetails();
                       },
                       child: Container(
                           height: 56,
