@@ -1,30 +1,22 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseMethods {
-  getId(Future<String?> number) async {
-    var documentID;
-    var collection = FirebaseFirestore.instance.collection('members');
-    var querySnapshots =
-        await collection.where("number", isEqualTo: number).get();
-    for (var snapshot in querySnapshots.docs) {
-      documentID = snapshot.id;
-      print(documentID); // <-- Document ID
-    }
-    return documentID.toString();
+
+
+  addItems(orderItems, shopName) async {
+    return await FirebaseFirestore.instance
+        .collection("Order")
+        .doc(shopName).collection("Items").doc()
+        .set(orderItems);
   }
 
-  addMembers(String number, memberdetails) async {
-    FirebaseFirestore.instance
-        .collection("members")
-        .doc(number)
-        .set(memberdetails)
-        .catchError((e) {
-      print(e.toString());
-    });
-  }
-
-  getMemberById(String id) async {
-    return await FirebaseFirestore.instance.collection("members").doc(id).get();
+  addItem(orderItems) async {
+    return await FirebaseFirestore.instance
+        .collection("Cart")
+        .doc("items")
+        .set(orderItems);
   }
 
   getMemberMobile(String number) async {
@@ -33,8 +25,12 @@ class DatabaseMethods {
         .where("number", isEqualTo: number)
         .get();
   }
-
-  getAllMember() async {
-    return await FirebaseFirestore.instance.collection("members").get();
+  totalPrice(totalPrice) async{
+    return await FirebaseFirestore.instance.collection("total").doc("price").set(totalPrice);
   }
+  updatePrices(updatedPrice) async {
+    return await FirebaseFirestore.instance.collection("total").doc("price").update(updatedPrice);
+  }
+
 }
+

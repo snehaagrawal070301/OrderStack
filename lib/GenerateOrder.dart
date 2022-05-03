@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:order_stack/ItemsList.dart';
 import 'package:order_stack/Widgets.dart';
 import 'package:order_stack/components/colorValues.dart';
 import 'package:order_stack/services/DatabaseMethods.dart';
-import 'package:flutter_dropdown_search/flutter_dropdown_search.dart';
 
 class GenerateOrder extends StatefulWidget {
   const GenerateOrder({Key? key}) : super(key: key);
@@ -15,6 +15,10 @@ class GenerateOrder extends StatefulWidget {
 class _GenerateOrderState extends State<GenerateOrder> {
   var customerNames;
   var displayCustomerName;
+  DatabaseMethods databaseMethods = DatabaseMethods();
+  var shopName;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,8 +99,8 @@ class _GenerateOrderState extends State<GenerateOrder> {
                             alignment: Alignment.bottomRight,
                             items: snapshot.data!.docs.map((value) {
                               return DropdownMenuItem(
-                                value: value.get('name'),
-                                child: Text('${value.get('name')}'),
+                                value: value.get('shopName'),
+                                child: Text('${value.get('shopName')}'),
                               );
                             }).toList(),
                             onChanged: (value) {
@@ -106,6 +110,7 @@ class _GenerateOrderState extends State<GenerateOrder> {
                                   debugPrint('make selected: $value');
                                   // Selected value will be stored
                                   displayCustomerName = value;
+                                  shopName=value;
                                   // Default dropdown value won't b``e displayed anymore
                                 //  setDefaultMake = false;
                                   // Set makeModel to true to display first car from list
@@ -115,152 +120,15 @@ class _GenerateOrderState extends State<GenerateOrder> {
                             },
                           );
                         })),
-                myText("Enter Product Type",
-                    size: Mq.height(context) * 0.020,
-                    color: Color(ColorValues.WHITE_COLOR),
-                    fontWeight: FontWeight.w500),
-                Container(
-                  height: MediaQuery.of(context).size.height / 14,
-                  margin: EdgeInsets.only(
-                      top: Mq.height(context) * 0.015,
-                      bottom: Mq.height(context) * 0.02),
-                  padding: EdgeInsets.only(
-                      left: Mq.width(context) * 0.02,
-                      top: Mq.height(context) * 0.01,
-                      bottom: Mq.height(context) * 0.01,
-                      right: Mq.width(context) * 0.01),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Theme.of(context).dividerColor, width: 0.4),
-                    color: Theme.of(context).cardColor,
-                    borderRadius: BorderRadius.circular(6.0),
-                  ),
-                  child: Center(
-                    child: TextFormField(
-                      keyboardType: TextInputType.name,
-                      autofocus: false,
-                      style: inputStyle(context),
-                      decoration: InputDecoration(
-                        hintText: "Product type",
-                        hintStyle: TextStyle(
-                            fontSize: 14,
-                            color:
-                                Theme.of(context).textTheme.headline5!.color),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-                myText("Enter Product Price",
-                    size: Mq.height(context) * 0.020,
-                    color: Color(ColorValues.WHITE_COLOR),
-                    fontWeight: FontWeight.w500),
-                Container(
-                  height: MediaQuery.of(context).size.height / 14,
-                  margin: EdgeInsets.only(
-                      top: Mq.height(context) * 0.015,
-                      bottom: Mq.height(context) * 0.02),
-                  padding: EdgeInsets.only(
-                      left: Mq.width(context) * 0.02,
-                      top: Mq.height(context) * 0.01,
-                      bottom: Mq.height(context) * 0.01,
-                      right: Mq.width(context) * 0.01),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Theme.of(context).dividerColor, width: 0.4),
-                    color: Theme.of(context).cardColor,
-                    borderRadius: BorderRadius.circular(6.0),
-                  ),
-                  child: Center(
-                    child: TextFormField(
-                      keyboardType: TextInputType.number,
-                      autofocus: false,
-                      style: inputStyle(context),
-                      decoration: InputDecoration(
-                        hintText: "Product price",
-                        hintStyle: TextStyle(
-                            fontSize: 14,
-                            color:
-                                Theme.of(context).textTheme.headline5!.color),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-                myText("Enter Product Unit",
-                    size: Mq.height(context) * 0.020,
-                    color: Color(ColorValues.WHITE_COLOR),
-                    fontWeight: FontWeight.w500),
-                Container(
-                  margin: EdgeInsets.only(
-                      top: Mq.height(context) * 0.015,
-                      bottom: Mq.height(context) * 0.02),
-                  padding: EdgeInsets.only(
-                      left: Mq.width(context) * 0.02,
-                      top: Mq.height(context) * 0.005,
-                      bottom: Mq.height(context) * 0.005,
-                      right: Mq.width(context) * 0.01),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Theme.of(context).dividerColor, width: 0.4),
-                    color: Theme.of(context).cardColor,
-                    borderRadius: BorderRadius.circular(6.0),
-                  ),
-                  child: Center(
-                    child: TextFormField(
-                      keyboardType: TextInputType.name,
-                      autofocus: false,
-                      style: inputStyle(context),
-                      decoration: InputDecoration(
-                        hintText: "Product unit",
-                        hintStyle: TextStyle(
-                            fontSize: 14,
-                            color:
-                                Theme.of(context).textTheme.headline5!.color),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-                myText("Enter Product Quantity",
-                    size: Mq.height(context) * 0.020,
-                    color: Color(ColorValues.WHITE_COLOR),
-                    fontWeight: FontWeight.w500),
-                Container(
-                  margin: EdgeInsets.only(
-                      top: Mq.height(context) * 0.015,
-                      bottom: Mq.height(context) * 0.02),
-                  padding: EdgeInsets.only(
-                      left: Mq.width(context) * 0.02,
-                      top: Mq.height(context) * 0.005,
-                      bottom: Mq.height(context) * 0.005,
-                      right: Mq.width(context) * 0.01),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Theme.of(context).dividerColor, width: 0.4),
-                    color: Theme.of(context).cardColor,
-                    borderRadius: BorderRadius.circular(6.0),
-                  ),
-                  child: Center(
-                    child: TextFormField(
-                      keyboardType: TextInputType.number,
-                      autofocus: false,
-                      style: inputStyle(context),
-                      decoration: InputDecoration(
-                        hintText: "Product quantity",
-                        hintStyle: TextStyle(
-                            fontSize: 14,
-                            color:
-                                Theme.of(context).textTheme.headline5!.color),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
                 Row(children: [
                   GestureDetector(
                     onTap: () {
-                      _bottomSheet(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return ItemsList(shopName);
+                        }),
+                      );
                     },
                     child: Container(
                         height: Mq.height(context) * 0.06,
@@ -305,125 +173,6 @@ class _GenerateOrderState extends State<GenerateOrder> {
       ),
     );
   }
-  _bottomSheet(context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext c) {
-          return Dialog(
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Color(ColorValues.WHITE_COLOR),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10))),
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
-              child: Column(
-                children: [
-                  Container(
-                    alignment: Alignment.topLeft,
-                    padding:
-                    const EdgeInsets.only(top: 20, left: 17, bottom: 15),
-                    child: Text(
-                      "Add Item",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Color(0xff000000),
-                        fontFamily: "Regular",
-                      ),
-                    ),
-                  ),
-                  Divider(
-                    height: 2,
-                    color: Color(ColorValues.BLACK_COLOR),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          top: 30, bottom: 10, left: 25, right: 25),
-                      padding: EdgeInsets.symmetric(horizontal: 25),
-                      height: 35,
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,
-                      decoration: BoxDecoration(
-                          color: Color(ColorValues.THEME_COLOR),
-                          borderRadius: BorderRadius.circular(10.0)),
-                      child: Center(
-                          child: Text(
-                            "Continue with Phone",
-                            style: TextStyle(
-                              color: Color(ColorValues.WHITE_COLOR),
-                              fontFamily: "Regular",
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
-                          )),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                    padding: EdgeInsets.symmetric(horizontal: 25),
-                    height: 35,
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width,
-                    decoration: BoxDecoration(
-                        border:
-                        Border.all(color: Color(ColorValues.BLACK_COLOR)),
-                        borderRadius: BorderRadius.circular(10.0)),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(left: 52),
-                          child: Image(
-                            image: AssetImage("assets/images/googleIcon.png"),
-                            height: 14,
-                            width: 14,
-                          ),
-                        ),
-                        Container(
-                            padding: EdgeInsets.only(left: 10),
-                            child: Text(
-                              "Continue with Google",
-                              style: TextStyle(
-                                color: Color(ColorValues.BLACK_COLOR),
-                                fontFamily: "Regular",
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textAlign: TextAlign.center,
-                            )),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                          margin: EdgeInsets.only(top: 10, bottom: 10),
-                          child: Text(
-                            "Cancel",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color(ColorValues.BLACK_TEXT_COL),
-                              fontFamily: "Regular",
-                            ),
-                            textAlign: TextAlign.center,
-                          ))),
-                ],
-              ),
-            ),
-          );
-        });
-  }
+
 
 }
