@@ -1,0 +1,46 @@
+{
+  "name": "",
+  "css_prefix_text": "",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "fb40641aff75d46bacf49e793f369a92",
+      "css": "person_add",
+      "code": 59392,
+      "src": "material"
+    },
+    {
+      "uid": "90713c20f01b6b0f1e275357e87a1468",
+      "css": "border_color",
+      "code": 59393,
+      "src": "material"
+    },
+    {
+      "uid": "3adf65eaea51a88f9c3a5fc219be5389",
+      "css": "playlist_add",
+      "code": 59394,
+      "src": "material"
+    },
+    {
+      "uid": "3392068839495c421c04eff00fc39cc2",
+      "css": "person",
+      "code": 59395,
+      "src": "material"
+    },
+    {
+      "uid": "f1f588dbae8b8a6f65926afaef3b9c63",
+      "css": "local_grocery_store",
+      "code": 59396,
+      "src": "material"
+    },
+    {
+      "uid": "d86c660494cea604e37b95769aa9b18c",
+      "css": "playlist_add_check",
+      "code": 59397,
+      "src": "material"
+    }
+  ]
+}
