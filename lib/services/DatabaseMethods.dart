@@ -31,6 +31,9 @@ class DatabaseMethods {
   updatePrices(updatedPrice) async {
     return await FirebaseFirestore.instance.collection("total").doc("price").update(updatedPrice);
   }
+  getCredential() async {
+    return await FirebaseFirestore.instance.collection("Login").get();
+  }
 
 }
 

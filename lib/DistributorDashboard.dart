@@ -130,7 +130,7 @@ class _DistributorDashboardState extends State<DistributorDashboard> {
                                                 children: [
                                                   Image(
                                                     image: AssetImage(
-                                                        'assets/images/Appointment.png'),
+                                                        'assets/images/add customer.png'),
                                                     height: 40,
                                                   )
                                                 ],
@@ -192,7 +192,7 @@ class _DistributorDashboardState extends State<DistributorDashboard> {
                                               children: [
                                                 Image(
                                                   image: AssetImage(
-                                                      'assets/images/call.png'),
+                                                      'assets/images/add item.png'),
                                                   height: 40,
                                                 )
                                               ],
@@ -262,7 +262,7 @@ class _DistributorDashboardState extends State<DistributorDashboard> {
                                                 children: [
                                                   Image(
                                                     image: AssetImage(
-                                                        'assets/images/vault.png'),
+                                                        'assets/images/generate order.png'),
                                                     height: 50,
                                                   )
                                                 ],
@@ -321,7 +321,7 @@ class _DistributorDashboardState extends State<DistributorDashboard> {
                                                 children: [
                                                   Image(
                                                     image: AssetImage(
-                                                        'assets/images/history.png'),
+                                                        'assets/images/view customers.png'),
                                                     height: 40,
                                                   )
                                                 ],
@@ -331,7 +331,7 @@ class _DistributorDashboardState extends State<DistributorDashboard> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    "History",
+                                                    "View Customers",
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                       fontFamily: "Regular",
@@ -387,7 +387,7 @@ class _DistributorDashboardState extends State<DistributorDashboard> {
                                                 children: [
                                                   Image(
                                                     image: AssetImage(
-                                                        'assets/images/vault.png'),
+                                                        'assets/images/view items.png'),
                                                     height: 50,
                                                   )
                                                 ],
@@ -397,7 +397,7 @@ class _DistributorDashboardState extends State<DistributorDashboard> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    "Vault",
+                                                    "View Items",
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                       fontFamily: "Regular",
@@ -446,7 +446,7 @@ class _DistributorDashboardState extends State<DistributorDashboard> {
                                                 children: [
                                                   Image(
                                                     image: AssetImage(
-                                                        'assets/images/history.png'),
+                                                        'assets/images/view orders.png'),
                                                     height: 40,
                                                   )
                                                 ],
@@ -456,7 +456,7 @@ class _DistributorDashboardState extends State<DistributorDashboard> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    "History",
+                                                    "View Orders",
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                       fontFamily: "Regular",

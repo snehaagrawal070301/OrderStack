@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:order_stack/DistributorDashboard.dart';
 import 'package:order_stack/Widgets.dart';
 import 'package:order_stack/components/colorValues.dart';
+import 'package:order_stack/services/DatabaseMethods.dart';
 
 class DistributorLogin extends StatefulWidget {
   //final Function toggle;
@@ -15,47 +17,38 @@ class _DistributorLoginState extends State<DistributorLogin> {
   //final Function toggle;
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
-  //_SignInState(this.toggle);
-  //QuerySnapshot snapshotUserInfo;
-  bool isLoading = false;
-  //AuthMethods authMethods = AuthMethods();
-  //DatabaseMethods databaseMethods = DatabaseMethods();
-  //HelperFunction helperFunction = HelperFunction();
-  /*signIn() {
-    if (formKey.currentState.validate()) {
-      helperFunction
-          .saveUserEmailSharedPreference(emailTextEditingController.text);
-      databaseMethods
-          .getUserByEmail(emailTextEditingController.text)
-          .then((val) {
-        setState(() {
-          snapshotUserInfo = val;
-          helperFunction.saveUserNameSharedPreference(
-              snapshotUserInfo.documents[0].data['name']);
-        });
-      });
+  DatabaseMethods databaseMethods = DatabaseMethods();
+  late QuerySnapshot querySnapshot;
+  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+  signIn() async {
+    await databaseMethods.getCredential().then((val) {
       setState(() {
-        isLoading = true;
+        querySnapshot = val;
       });
-
-      authMethods
-          .signInWithEmailAndPassword(emailTextEditingController.text,
-          passwordTextEditingController.text)
-          .then((value) {
-        if (value != null) {
-          helperFunction.saveUserLoggedInPreference(true);
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => ChatRoom()));
-        }
-      });
+    });
+    if (querySnapshot.docs[0].get("uid") == emailTextEditingController.text &&
+        querySnapshot.docs[0].get("password") == passwordTextEditingController.text) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                DistributorDashboard()),
+      );
+      emailTextEditingController.clear();
+      passwordTextEditingController.clear();
+    } else {
+      scaffoldKey.currentState
+      // ignore: deprecated_member_use
+          ?.showSnackBar(new SnackBar(content: Text("Invalid")));
     }
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(ColorValues.WHITE_COLOR),
         //appBar: AppBar(title: Text("Sign In")),
+      key: scaffoldKey,
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 24),
           child:
@@ -106,9 +99,8 @@ class _DistributorLoginState extends State<DistributorLogin> {
                 ),
               GestureDetector(
                 onTap: () {
-                   Navigator.push(
-              context, MaterialPageRoute(builder: (context) => DistributorDashboard()));
-                },
+                   signIn();
+                        },
                 child: Container(
                   height: 45,
                   decoration: BoxDecoration(
